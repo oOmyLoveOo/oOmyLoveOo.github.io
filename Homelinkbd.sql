@@ -1,7 +1,7 @@
 CREATE TABLE `Devices` (
   `id_devices` INT PK,
   `name` VARCHAR,
-  `status` ENUM('Approved', 'Rejected),
+  `status` ENUM('Approved', 'Rejected'),
   `user_id` INT FK,
   `type_id` INT FK
 );
