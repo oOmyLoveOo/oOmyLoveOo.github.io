@@ -1,8 +1,3 @@
-Here’s a well-structured `README.md` for your project named **Homelink**, a Node.js web server that integrates with **Home Assistant** and uses **MariaDB** for storage:
-
----
-
-```markdown
 # Homelink
 
 **Homelink** is a lightweight Node.js web server designed to store and manage data, also made to control devices, from [Home Assistant](https://www.home-assistant.io/). It uses a MariaDB database for persistence and provides a RESTful API for interacting with home automation data.
