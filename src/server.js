@@ -1,51 +1,54 @@
 const express = require('express');
-const cors = require('cors'); // 👈 importar CORS
+const cors = require('cors');
+const axios = require('axios');
+require('dotenv').config();
+
 const app = express();
 const PORT = 3000;
 
-// Middleware
-app.use(cors()); // 👈 habilitar CORS para todas las rutas
 app.use(express.json());
+app.use(cors());
 
-// Simulated light state
-let lightState = 'off';
+// Hardcodea el token directamente aquí
+const token = 'Bearer ' + process.env.TOKEN;
+console.log(token)
 
-// Auth middleware (simple ejemplo)
-app.use((req, res, next) => {
-  const authHeader = req.headers['authorization'];
-  if (!authHeader || !authHeader.startsWith('Bearer')) {
-    return res.status(401).json({ error: 'Unauthorized' });
+const haURL = 'http://192.168.1.200:8123';  // Verifica que esta IP sea accesible
+
+// Ruta para encender la luz
+app.post('/api/services/light/turn_on', async (req, res) => {
+  console.log('on')
+  try {
+    const response = await axios.post(`${haURL}/api/services/light/turn_on`, req.body, {
+      headers: {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      },
+    });
+    res.json(response.data);
+  } catch (err) {
+    console.error('Error al encender:', err.message);
+    res.status(err.response?.status || 500).send('Error al encender la luz');
   }
-  next();
 });
 
-// Encender luz
-app.post('/api/services/light/turn_on', (req, res) => {
-  const { entity_id } = req.body;
-  if (!entity_id) {
-    return res.status(400).json({ error: 'Missing entity_id' });
+// Ruta para apagar la luz
+app.post('/api/services/light/turn_off', async (req, res) => {
+  console.log('off')
+  try {
+    const response = await axios.post(`${haURL}/api/services/light/turn_off`, req.body, {
+      headers: {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      },
+    });
+    res.json(response.data);
+  } catch (err) {
+    console.error('Error al apagar:', err.message);
+    res.status(err.response?.status || 500).send('Error al apagar la luz');
   }
-  lightState = 'on';
-  console.log(`Light ${entity_id} turned ON`);
-  res.json({ success: true, state: lightState });
-});
-
-// Apagar luz
-app.post('/api/services/light/turn_off', (req, res) => {
-  const { entity_id } = req.body;
-  if (!entity_id) {
-    return res.status(400).json({ error: 'Missing entity_id' });
-  }
-  lightState = 'off';
-  console.log(`Light ${entity_id} turned OFF`);
-  res.json({ success: true, state: lightState });
-});
-
-// Consultar estado actual (opcional)
-app.get('/api/light_state', (req, res) => {
-  res.json({ state: lightState });
 });
 
 app.listen(PORT, () => {
-  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+  console.log(`Servidor proxy corriendo en http://localhost:${PORT}`);
 });
