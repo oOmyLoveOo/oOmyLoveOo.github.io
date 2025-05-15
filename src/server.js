@@ -1,15 +1,16 @@
-// server.js
 const express = require('express');
+const cors = require('cors'); // 👈 importar CORS
 const app = express();
 const PORT = 3000;
 
-// Middleware to parse JSON bodies
+// Middleware
+app.use(cors()); // 👈 habilitar CORS para todas las rutas
 app.use(express.json());
 
 // Simulated light state
 let lightState = 'off';
 
-// Auth middleware (simple example)
+// Auth middleware (simple ejemplo)
 app.use((req, res, next) => {
   const authHeader = req.headers['authorization'];
   if (!authHeader || !authHeader.startsWith('Bearer')) {
@@ -18,7 +19,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Turn ON light
+// Encender luz
 app.post('/api/services/light/turn_on', (req, res) => {
   const { entity_id } = req.body;
   if (!entity_id) {
@@ -29,7 +30,7 @@ app.post('/api/services/light/turn_on', (req, res) => {
   res.json({ success: true, state: lightState });
 });
 
-// Turn OFF light
+// Apagar luz
 app.post('/api/services/light/turn_off', (req, res) => {
   const { entity_id } = req.body;
   if (!entity_id) {
@@ -40,11 +41,11 @@ app.post('/api/services/light/turn_off', (req, res) => {
   res.json({ success: true, state: lightState });
 });
 
-// Optional endpoint to get current state
+// Consultar estado actual (opcional)
 app.get('/api/light_state', (req, res) => {
   res.json({ state: lightState });
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
