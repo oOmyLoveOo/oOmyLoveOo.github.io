@@ -30,41 +30,19 @@ homelink/
 │
 ├── docker/                     # Docker-related config files
 │   ├── mariadb/                # MariaDB-specific Docker config
-│   │   └── my.cnf              # MariaDB configuration file (optional)
+│   │   └── init.sql            # DB schema or initialization script
 │   └── node/                   # Node.js-specific Docker config
 │       └── Dockerfile          # Dockerfile for Node.js server
 │
 ├── src/                        # Main server application code
-│   ├── api/                    # REST API endpoints
-│   │   ├── users.js
-│   │   ├── homes.js
-│   │   └── devices.js
-│   │
-│   ├── services/               # Business logic, Home Assistant API calls
-│   │   └── homeAssistantService.js
-│   │
-│   ├── db/                     # Database config and access (ORM or raw SQL)
-│   │   ├── connection.js
-│   │   └── models/
-│   │       ├── User.js
-│   │       ├── Home.js
-│   │       └── Device.js
-│   │
-│   ├── config/                 # App configuration (env, constants)
-│   │   └── index.js
-│   │
-│   ├── routes/                 # Express routes
-│   │   └── index.js
-│   │
-│   ├── app.js                  # Express app initialization
 │   └── server.js               # App entry point
 │
 ├── web/                        # Static frontend (or frontend source code)
 │   └── index.html              # Or a framework like React/Vue here
 │
-├── .env                        # Environment variables
+├── .env.example                # Environment variables
 ├── .gitignore
-├── docker-compose.yml          # Docker Compose config
+├── compose.yml                 # Docker Compose config
 ├── package.json
 └── README.md
 
