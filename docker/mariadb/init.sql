@@ -8,7 +8,7 @@ CREATE TABLE `Home` (
   `id_home` INT PK,
   `name` VARCHAR,
   `address` TEXT,
-  `id_user` INT,
+  `id_user` INT FK,
   `created_at` DATETIME,
   FOREIGN KEY (`id_user`) REFERENCES `Users`(`id_user`)
 );
@@ -40,5 +40,5 @@ CREATE TABLE `Logs` (
   `action_id` INT FK,
   `date` DATE,
   FOREIGN KEY (`action_id`) REFERENCES `Actions`(`id_action`),
-  FOREIGN KEY (`id_log`) REFERENCES `Devices`(`id_devices`)
+  FOREIGN KEY (`device_id`) REFERENCES `Devices`(`id_devices`)
 );
