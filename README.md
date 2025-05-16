@@ -80,7 +80,7 @@ This will start the Node.js server and a MariaDB database.
 
 ## 🎬 Demo
 
-![Demo GIF](docs/demo.gif)
+![Demo GIF](docs/Demo.gif)
 
 ---
 
