@@ -78,6 +78,12 @@ This will start the Node.js server and a MariaDB database.
 
 ---
 
+## 🎬 Demo
+
+![Demo GIF](docs/demo.gif)
+
+---
+
 ## 📬 API Endpoints
 
 > *More detailed API documentation is not coming soon.*
