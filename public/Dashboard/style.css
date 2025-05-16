@@ -407,6 +407,15 @@
   .hidden {
     display: none;
   }
+
+  .add-device-btn{
+    background: rgb(133, 133, 208);
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+  }
   
   /* Responsive Styles */
   @media (max-width: 768px) {

@@ -478,3 +478,4 @@ function init() {
 
 // Initialize when the DOM is loaded
 document.addEventListener('DOMContentLoaded', init);
+
